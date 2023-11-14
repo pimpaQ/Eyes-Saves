@@ -6,12 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Глазки_Saves"
         mc:Ignorable="d"
-        Title="Ямалетдинов Глазки" Height="450" Width="800" MinHeight="20" MinWidth="20" FontFamily="Century Gothic" Icon="Res/Глазки-save.ico">
+        Title="Ямалетдинов Глазки"  Height="450" Width="800" MinHeight="20" MinWidth="20" FontFamily="Century Gothic" Icon="Res/Глазки-save.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Image Source="Res/Глазки-save.png" HorizontalAlignment="Left" Width="100" Height="100" VerticalAlignment="Center"/>
         <TextBlock Text="Eyes-Saves" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"/>

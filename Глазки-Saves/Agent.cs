@@ -50,5 +50,12 @@ namespace Глазки_Saves
                 return AgentType.Title;
             }
         }
+        public string PhoneFiltr
+        {
+            get
+            {
+                return Phone.Replace("+", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
+            }
+        }
     }
 }

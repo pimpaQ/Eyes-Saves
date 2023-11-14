@@ -27,6 +27,7 @@ namespace Глазки_Saves
             Manager.MainFrame = MainFrame;
         }
 
+
         private void Btn_Back_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.GoBack();
