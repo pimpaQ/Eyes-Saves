@@ -37,27 +37,11 @@ namespace Глазки_Saves
         {
             get
             {
-                var agentIDsWithSales = EyesEntities.GetContext().ProductSale.Select(s => s.AgentID).Distinct();
-                var agentIDsWithoutSales = EyesEntities.GetContext().Agent
-                    .Where(agent => !agentIDsWithSales.Contains(agent.ID))
-                    .Select(agent => agent.ID);
-
-                int agentID = this.AgentID;
-
                 int sum = 0;
-
-                // Проверяем, есть ли продажи для текущего AgentID
-                if (agentIDsWithoutSales.Contains(agentID))
-                {
-                    return 0;
-                }
-                else
-                {
-                    sum = EyesEntities.GetContext().ProductSale
-                        .Where(s => s.AgentID == agentID)
-                        .Sum(s => s.ProductCount);
-                    return sum;
-                }
+                sum = GetContext().ProductSale
+                .Where(s => s.AgentID == this.AgentID)
+                .Sum(s => s.ProductCount);
+                return sum;
             }
         }
         public int Discount
