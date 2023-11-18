@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,7 +32,8 @@ namespace Глазки_Saves
         {
             InitializeComponent();
             var current_Agent = EyesEntities.GetContext().Agent.ToList();
-            AgentListView.ItemsSource = current_Agent;
+            var current_Product = EyesEntities.GetContext().ProductSale.ToList();
+                     
             CB_Filtr.SelectedIndex = 0;
             CB_Sort.SelectedIndex = 0;
             Update_Agent();
@@ -230,5 +232,10 @@ namespace Глазки_Saves
                 Update_Agent();
             }
         }
+
+        
+
+        
     }
+    //current_Agent = current_Agent.Where(p => p.AgentTypeString == "МКК").ToList();
 }

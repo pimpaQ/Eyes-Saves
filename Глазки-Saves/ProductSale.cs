@@ -11,7 +11,8 @@ namespace Глазки_Saves
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class ProductSale
     {
         public int ID { get; set; }
@@ -22,5 +23,29 @@ namespace Глазки_Saves
     
         public virtual Agent Agent { get; set; }
         public virtual Product Product { get; set; }
+        private static EyesEntities _context;
+
+        public static EyesEntities GetContext()
+        {
+            if (_context == null)
+            {
+                _context = new EyesEntities();
+            }
+            return _context;
+        }
+        public int SumProd
+        {
+            get
+            {
+                int sum = 0;
+
+                sum = GetContext().ProductSale
+                    .Where(s => s.AgentID == this.AgentID)
+                    .Sum(s => s.ProductCount);
+                return sum;
+            }
+        }
+
     }
+
 }

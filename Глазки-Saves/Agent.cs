@@ -11,8 +11,7 @@ namespace Глазки_Saves
 {
     using System;
     using System.Collections.Generic;
-    using System.Windows.Media.Animation;
-
+    
     public partial class Agent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -58,4 +57,5 @@ namespace Глазки_Saves
             }
         }
     }
+
 }
