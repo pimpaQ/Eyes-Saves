@@ -92,7 +92,6 @@ namespace Глазки_Saves
                 MessageBox.Show(errors.ToString());
                 return;
             }
-            MessageBox.Show(_currentAgent.AgentTypeID.ToString());
             _currentAgent.AgentTypeID = CB_Sel.SelectedIndex + 1;
             if (_currentAgent.ID == 0)
             {
@@ -139,6 +138,10 @@ namespace Глазки_Saves
         private void CB_Sel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void ProductComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
         }
     }
 }

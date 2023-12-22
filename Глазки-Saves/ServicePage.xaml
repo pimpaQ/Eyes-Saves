@@ -7,13 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ServicePage" FontFamily="Century Gothic" IsVisibleChanged="Page_IsVisibleChanged_1">
-
+    <Page.Resources>
+        <local:CountToVisibilityConverter x:Key="CountToVisibilityConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height= "auto"></RowDefinition>
             <RowDefinition Height= "*"></RowDefinition>
             <RowDefinition Height= "60"></RowDefinition>
         </Grid.RowDefinitions>
+        <Button Name="EditPrior" Grid.Row="2" HorizontalAlignment="Left" Content="Изменить приоритет" FontSize="15" Click="EditPrior_Click" Visibility="{Binding ElementName=AgentListView, Path=SelectedItems.Count , Converter={StaticResource CountToVisibilityConverter}}" Background="#AA6EF1" Foreground="White" BorderBrush="#AA6EF1" Style="{StaticResource MaterialDesignRaisedButton}" FontFamily="Century Gothic" />
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Name="TBCount" FontSize="12" Height="20"/>
             <TextBlock Name="TBAllRecords" FontSize="12" Height="20"/>
@@ -29,8 +32,8 @@
         </StackPanel>
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBox Width="250" HorizontalAlignment="Left" FontSize="15" Name="TB_Search" Margin="5" TextChanged="TB_Search_TextChanged"/>
-                <ComboBox Name="CB_Sort" Width="300" Text="Сортировка" FontSize="15" Margin="5" SelectionChanged="CB_Sort_SelectionChanged">
+                <TextBox Width="350" HorizontalAlignment="Left" FontSize="15" Name="TB_Search" Margin="5 0 0 0" TextChanged="TB_Search_TextChanged"/>
+                <ComboBox Name="CB_Sort" Width="300" Text="Сортировка" FontSize="15" Margin="5 0 0 0" SelectionChanged="CB_Sort_SelectionChanged">
                     <TextBlock>Сортировка</TextBlock>
                     <TextBlock>Наименование по возрастанию</TextBlock>
                     <TextBlock>Наименование по убыванию</TextBlock>
@@ -39,7 +42,7 @@
                     <TextBlock>Приоритет по возрастанию</TextBlock>
                     <TextBlock>Приоритет по убыванию</TextBlock>
                 </ComboBox>
-                <ComboBox Name="CB_Filtr" Width="200" Text="Фильтрация" FontSize="15" Margin="5" SelectionChanged="CB_Filtr_SelectionChanged">
+                <ComboBox Name="CB_Filtr" Width="200" Text="Фильтрация" FontSize="15" Margin="5 0 0 0" SelectionChanged="CB_Filtr_SelectionChanged">
                     <TextBlock>Все</TextBlock>
                     <TextBlock>МФО</TextBlock>
                     <TextBlock>ООО</TextBlock>
@@ -51,10 +54,10 @@
             </StackPanel>
         </WrapPanel>
         <Button Content="Добавить" Background="#AA6EF1" Click="AddBtn_Click" Foreground="White" BorderBrush="#AA6EF1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Width="175" Height="30" HorizontalAlignment="Right"/>
-        <ListView Name="AgentListView" Grid.Row="1">
+        <ListView Name="AgentListView" Grid.Row="1" SelectionMode="Multiple">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Background="{Binding FonStyle}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="300"></ColumnDefinition>
                             <ColumnDefinition Width="500"></ColumnDefinition>
@@ -78,7 +81,7 @@
                                 </Binding>
                             </Image.Source>
                         </Image>
-                        <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.RowSpan="4" DataContext="{Binding ProductSale}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.RowSpan="4" HorizontalAlignment="Right" VerticalAlignment="Center">
                             <TextBlock Text="{Binding Discount, FallbackValue = 0}" Margin="700 0 0 0" FontSize="30"/>
                             <TextBlock Text="%" Margin="5 0 0 0" FontSize="30" HorizontalAlignment="Right"/>
                         </StackPanel>
@@ -98,6 +101,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
                             <Button Content="Редактировать" Name="EditBtn" Margin="2" Click="EditBtn_Click" Background="#AA6EF1" Foreground="White" BorderBrush="#AA6EF1" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                            <Button Content="Продукция" Name="ProductBtn" Margin="2" Click="ProductBtn_Click" Background="#AA6EF1" Foreground="White" BorderBrush="#AA6EF1" Style="{StaticResource MaterialDesignRaisedButton}"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

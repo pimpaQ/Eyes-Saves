@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +18,6 @@ using System.Xml;
 
 namespace Глазки_Saves
 {
-    /// <summary>
-    /// Логика взаимодействия для ServicePage.xaml
-    /// </summary>
     public partial class ServicePage : Page
     {
         int CountRecords = 0;
@@ -27,6 +26,7 @@ namespace Глазки_Saves
 
         List<Agent> CurrentPageList = new List<Agent>();
         List<Agent> TableList = new List<Agent>();
+
         public ServicePage()
         {
             InitializeComponent();
@@ -34,9 +34,15 @@ namespace Глазки_Saves
             AgentListView.ItemsSource = current_Agent;
             CB_Filtr.SelectedIndex = 0;
             CB_Sort.SelectedIndex = 0;
+            
             Update_Agent();
-
+            
         }
+        public ListView GetAgentListView()
+        {
+            return AgentListView;
+        }
+        
         private void ChangePage(int direction, int? selectedPage)
         {
             CurrentPageList.Clear();
@@ -133,11 +139,11 @@ namespace Глазки_Saves
             }
             if (CB_Sort.SelectedIndex == 3)
             {
-                current_Agent = current_Agent.OrderBy(p => p.Title).ToList();
+                current_Agent = current_Agent.OrderBy(p => p.Discount).ToList();
             }
             if (CB_Sort.SelectedIndex == 4)
             {
-                current_Agent = current_Agent.OrderBy(p => p.Title).ToList();
+                current_Agent = current_Agent.OrderByDescending(p => p.Discount).ToList();
             }
             if (CB_Sort.SelectedIndex == 5)
             {
@@ -229,6 +235,23 @@ namespace Глазки_Saves
                 AgentListView.ItemsSource = EyesEntities.GetContext().Agent.ToList();
                 Update_Agent();
             }
+        }
+        
+        private void EditPrior_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedAgents = AgentListView.SelectedItems.Cast<Agent>();
+            int maxPriority = selectedAgents.Max(agent => agent.Priority);
+
+            PriorityEdit priorityEdit = new PriorityEdit(AgentListView);
+            priorityEdit.MaxPriority = maxPriority;
+            priorityEdit.ShowDialog();
+
+            ChangePage(0, 0);
+        }
+
+        private void ProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new ProductRealizationPage((sender as Button).DataContext as Agent));
         }
     }
 }

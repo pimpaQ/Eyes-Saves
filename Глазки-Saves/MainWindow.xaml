@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:Глазки_Saves"
         mc:Ignorable="d"
         Title="Ямалетдинов Глазки"  Height="450" Width="800" MinHeight="20" MinWidth="20" FontFamily="Century Gothic" Icon="Res/Глазки-save.ico">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -15,6 +16,6 @@
         <Image Source="Res/Глазки-save.png" HorizontalAlignment="Left" Width="100" Height="100" VerticalAlignment="Center"/>
         <TextBlock Text="Eyes-Saves" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"/>
         <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered"/>
-        <Button Content="Назад" Height="30" Width="140" VerticalAlignment="Center" Name="Btn_Back" HorizontalAlignment="Right" Click="Btn_Back_Click" FontFamily="Century Gotic" Style="{StaticResource MaterialDesignFlatButton}" Foreground="#AA6EF1"/>
+        <Button Content="Назад" Height="30" Width="140" VerticalAlignment="Center" Name="Btn_Back" HorizontalAlignment="Right" Click="Btn_Back_Click" FontFamily="Century Gothic" Style="{StaticResource MaterialDesignFlatButton}" Foreground="#AA6EF1"/>
     </Grid>
 </Window>

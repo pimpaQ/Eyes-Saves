@@ -11,6 +11,10 @@ namespace Глазки_Saves
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Media;
     using System.Windows.Media.Animation;
 
     public partial class Agent
@@ -42,12 +46,34 @@ namespace Глазки_Saves
         public virtual ICollection<ProductSale> ProductSale { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Shop> Shop { get; set; }
+        private static EyesEntities _context;
 
+        public static EyesEntities GetContext()
+        {
+            if (_context == null)
+            {
+                _context = new EyesEntities();
+            }
+            return _context;
+        }
         public string AgentTypeString
         {
             get
             {
                 return AgentType.Title;
+            }
+            
+        }
+        
+        public int AgentTypePlusOne
+        {
+            get
+            {
+                return AgentTypeID - 1;
+            }
+            set
+            {
+                AgentTypeID = value;
             }
         }
         public string PhoneFiltr
@@ -55,6 +81,70 @@ namespace Глазки_Saves
             get
             {
                 return Phone.Replace("+", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
+            }
+        }
+        public int Discount
+        {
+            get
+            {
+                var sumQuery = EyesEntities.GetContext().ProductSale
+                .Join(EyesEntities.GetContext().Product,
+                sale => sale.ProductID,
+                product => product.ID,
+                (sale, product) => new { sale, product })
+                .Where(joined => joined.sale.AgentID == this.ID)
+                .GroupBy(joined => joined.sale.AgentID)
+                .Select(grouped => new
+                {
+                    AgentID = grouped.Key,
+                    Total = grouped.Sum(x => x.sale.ProductCount * x.product.MinCostForAgent)
+                });
+                int sum = (int)(sumQuery.FirstOrDefault()?.Total ?? 0);
+
+                int Disc = 0;
+
+                if (sum > 1000 && sum < 5000)
+                    Disc = 5;
+                else if (sum > 5000 && sum < 15000)
+                    Disc = 10;
+                else if (sum > 15000 && sum < 50000)
+                    Disc = 20;
+                else if (sum > 50000)
+                    Disc = 25;
+                else
+                    Disc = 0;
+                return Disc;
+            }
+        }
+        
+        public int thisProdID
+        {
+            get
+            {
+                var productIDs = from product in EyesEntities.GetContext().Product
+                                 join productSale in EyesEntities.GetContext().ProductSale
+                                 on product.ID equals productSale.ProductID
+                                 select product.ID;
+
+                return productIDs.FirstOrDefault();
+            }
+            set
+            {
+                thisProdID = value;
+            }
+        }
+        public SolidColorBrush FonStyle
+        {
+            get
+            {
+                if (Discount >= 25)
+                {
+                    return (SolidColorBrush)new BrushConverter().ConvertFromString("LightGreen");
+                }
+                else
+                {
+                    return (SolidColorBrush)new BrushConverter().ConvertFromString("White");
+                }
             }
         }
     }

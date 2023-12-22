@@ -1,0 +1,46 @@
+﻿<Page x:Class="Глазки_Saves.ProductRealizationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Глазки_Saves"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProductRealizationPage" FontFamily="Century Gothic">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Name="AddProdSale" Content="Добавить" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="8" Click="AddProdSale_Click" Background="#AA6EF1" Foreground="White" BorderBrush="#AA6EF1" Width="150" Style="{StaticResource MaterialDesignRaisedButton}" FontFamily="Century Gothic"/>
+        <TextBlock Name="NoProd" FontSize="60" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ListView Name="ProductSaleListView" Grid.Row="1" DataContext="{Binding ProductSale}" Grid.ColumnSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                            <TextBlock Text="Продукция:"  FontSize="20" Margin="5 5 0 0" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <TextBlock  Name="ProdNameText" Margin="5 5 0 0"  Text="{Binding ProductName}" FontSize="20" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <TextBlock Text="Дата продажи:"  FontSize="20" Margin="5 5 0 0" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding SaleDateText}" Margin="5 5 0 0" FontSize="20" Name="SaleDate" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2">
+                            <TextBlock Text="Кол-во продаж:" FontSize="20" Margin="5 5 0 0" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding SaleCount}" Margin="5 5 0 0" FontSize="20" Name="CountSale" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <Button Grid.Row="3" Name="DeleteBtn" Content="Удалить" Width="auto" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="DeleteBtn_Click" Background="#AA6EF1" Foreground="White" BorderBrush="#AA6EF1" Style="{StaticResource MaterialDesignRaisedButton}" FontFamily="Century Gothic"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

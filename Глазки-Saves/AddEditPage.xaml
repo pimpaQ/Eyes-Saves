@@ -19,12 +19,12 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="800"/>
+            <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
             <TextBlock Text="Наименование" FontSize="15" Height="20" MinWidth="120" Width="auto" Margin="5"/>
-            <TextBox Text="{Binding Title}" FontSize="15" Height="30" Width="400"/>
+            <TextBox Text="{Binding Title}" FontSize="15" Height="30" Width="500"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="Адрес" FontSize="15" Height="20" MinWidth="120" Width="auto" Margin="5"/>
@@ -32,7 +32,7 @@
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
             <TextBlock Text="Директор" FontSize="15" Height="20" MinWidth="120" Width="auto" Margin="5"/>
-            <TextBox Text="{Binding DirectorName}" FontSize="15" Height="30" Width="400"/>
+            <TextBox Text="{Binding DirectorName}" FontSize="15" Height="30" Width="500"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Vertical" Grid.RowSpan="4">
             <TextBlock Text="Логотип" FontSize="15" Height="20" MinWidth="120" Width="auto" Margin="5"/>
@@ -45,7 +45,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="5" Orientation="Horizontal">
             <TextBlock Text="Тип агента" FontSize="15" Height="20" Width="100" Margin="1"/>
-            <ComboBox Name="CB_Sel" Width="100" FontSize="15" Margin="5" >
+            <ComboBox SelectedIndex="{Binding AgentTypePlusOne}" Name="CB_Sel" Width="100" FontSize="15" Margin="5" >
                 <TextBlock>МФО</TextBlock>
                 <TextBlock>ООО</TextBlock>
                 <TextBlock>ЗАО</TextBlock>
@@ -60,21 +60,20 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="2" Margin="5" Orientation="Horizontal">
             <TextBlock Text="ИНН" FontSize="15" Height="20" Width="100" Margin="1"/>
-            <TextBox Text="{Binding INN}" FontSize="15" Height="30" Width="100"/>
+            <TextBox Text="{Binding INN}" FontSize="15" Height="30" Width="200"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="3" Margin="5" Orientation="Horizontal">
             <TextBlock Text="КПП" FontSize="15" Height="20" Width="100" Margin="1"/>
-            <TextBox Text="{Binding KPP}" FontSize="15" Height="30" Width="100"/>
+            <TextBox Text="{Binding KPP}" FontSize="15" Height="30" Width="200"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="4" Margin="5" Orientation="Horizontal">
             <TextBlock Text="Телефон" FontSize="15" Height="20" Width="100" Margin="1"/>
-            <TextBox Text="{Binding Phone}" FontSize="15" Height="30" Width="100"/>
+            <TextBox Text="{Binding Phone}" FontSize="15" Height="30" Width="250"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Margin="5" Orientation="Horizontal">
             <TextBlock Text="E-mail" FontSize="15" Height="20" Width="100" Margin="1"/>
-            <TextBox Text="{Binding Email}" FontSize="15" Height="30" Width="100"/>
+            <TextBox Text="{Binding Email}" FontSize="15" Height="30" Width="250"/>
         </StackPanel>
-
         <StackPanel Grid.Column="1" Grid.Row="6" Margin="5" Orientation="Horizontal">
             <Button Content="Сохранить" Name="SaveBtn" Click="SaveBtn_Click" Margin="5" Background="#AA6EF1" Foreground="White" BorderBrush="#AA6EF1" Style="{StaticResource MaterialDesignRaisedButton}"/>
             <Button Content="Удалить" Name="DelBtn" Click="DelBtn_Click" Margin="5" Opacity="{Binding ID}" Background="#AA6EF1" Foreground="White" BorderBrush="#AA6EF1" Style="{StaticResource MaterialDesignRaisedButton}"/>
